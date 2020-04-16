@@ -21,4 +21,5 @@ from litmus.views import signup_view, activation_sent_view, activate,home_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('litmus/',include('litmus.urls')),
+    path('friendship/',include('friendship.urls')),
 ]

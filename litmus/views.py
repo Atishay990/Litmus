@@ -23,6 +23,9 @@ from django.core.mail import EmailMessage
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
+from friendship.models import Friend,Follow,Block
+from friendship.models import FriendshipRequest
+
 @login_required(login_url='/litmus/login/')
 def home_view(request):
     return render(request,'litmus/home.html')
@@ -110,3 +113,21 @@ def login_view(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'litmus/login.html', {})
+
+def send_friend_request(request):
+
+    if request.method == 'POST':
+        usid = User.objects.get(email='atishayjain79@gmail.com').id
+        other_user = User.objects.get(pk=usid)
+        Friend.objects.add_friend(
+        request.user,other_user,message='Hi!! Wanna hang in.')
+        return HttpResponse(" Friend request sent")
+
+    else:
+        return render(request,'litmus/home.html')
+
+def receive_friend_request(request):
+    usid = User.objects.get(email='atishayjain79@gmail.com').id
+    friend_request = FriendshipRequest.objects.get(to_user=usid)
+    friend_request.accept();
+    return render(request,'litmus/friend_request.html')
