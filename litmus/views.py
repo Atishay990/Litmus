@@ -117,20 +117,25 @@ def login_view(request):
 def send_friend_request(request):
 
     if request.method == 'POST':
-        usid = User.objects.get(email='atishayjain79@gmail.com').id
+        friend_email = request.POST.get('email')
+        usid = User.objects.get(email=friend_email).id
         other_user = User.objects.get(pk=usid)
         Friend.objects.add_friend(
         request.user,other_user,message='Hi!! Wanna hang in.')
-        return HttpResponse(" Friend request sent")
+        return HttpResponse("Friend request sent")
 
     else:
-        return render(request,'litmus/home.html')
+        return render(request,'litmus/send_friend_request.html')
 
 def receive_friend_request(request):
-    usid = User.objects.get(email='atishayjain79@gmail.com').id
+    usid = User.objects.get(email=request.user.email).id
     friend_request = FriendshipRequest.objects.get(to_user=usid)
     friend_request.accept();
     return HttpResponse("Friend request accepted")
 
 def incoming_friend_request(request):
     return render(request,'litmus/friend_request.html')
+
+def show_friends(request):
+    list = Friend.objects.friends(request.user)
+    return render(request,'litmus/show_friends.html',{'list':list})
