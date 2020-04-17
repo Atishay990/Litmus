@@ -130,4 +130,7 @@ def receive_friend_request(request):
     usid = User.objects.get(email='atishayjain79@gmail.com').id
     friend_request = FriendshipRequest.objects.get(to_user=usid)
     friend_request.accept();
+    return HttpResponse("Friend request accepted")
+
+def incoming_friend_request(request):
     return render(request,'litmus/friend_request.html')

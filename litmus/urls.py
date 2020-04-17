@@ -14,7 +14,8 @@ urlpatterns= [
   path('activate/<slug:uidb64>/<slug:token>/',views.activate,name='activate'),
   path('logout/',views.logout_view,name='logout'),
   path('send_request/',views.send_friend_request,name='friend_request_sent'),
-  path('friend_requests/',views.receive_friend_request,name='friend_request_accepted')
+  path('friend_requests/',views.incoming_friend_request,name='incoming_friend_request'),
+  path('accept/',views.receive_friend_request,name='friend_request'),
 ]
 
 urlpatterns += static((settings.STATIC_URL), document_root=(settings.STATIC_ROOT))
