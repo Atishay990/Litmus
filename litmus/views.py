@@ -2,7 +2,6 @@ from django.contrib.auth import login, authenticate,logout
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_text
-#from django.contrib.auth.models import User
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -26,6 +25,11 @@ from django.contrib.auth.decorators import login_required
 from friendship.models import Friend,Follow,Block
 from friendship.models import FriendshipRequest
 
+from .graphMap import friendGraph
+f  = friendGraph()
+
+""" decorators for pages that requires login of authorised user """
+
 @login_required(login_url='/litmus/login/')
 def home_view(request):
     return render(request,'litmus/home.html')
@@ -43,6 +47,8 @@ def logout_view(request):
 def activation_sent_view(request):
     return render(request,'litmus/activation_sent.html')
 
+""" function that is called when user clicks on the links that is generated in the mail for final registraion"""
+
 def activate(request,uidb64,token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -58,6 +64,8 @@ def activate(request,uidb64,token):
         return redirect('home')
     else:
         return render(request,'litmus/activation_invalid.html')
+
+""" This function is called when user clicks on sign up button"""
 
 def signup_view(request):
     if request.method  == 'POST':
@@ -117,25 +125,34 @@ def login_view(request):
 def send_friend_request(request):
 
     if request.method == 'POST':
-        friend_email = request.POST.get('email')
-        usid = User.objects.get(email=friend_email).id
-        other_user = User.objects.get(pk=usid)
-        Friend.objects.add_friend(
-        request.user,other_user,message='Hi!! Wanna hang in.')
-        return HttpResponse("Friend request sent")
+        friend_email = request.POST.get('email') # gets email entered by user to whom friend request has to be send
+        my_email  = request.user.email
+        #usid = User.objects.get(email=friend_email).id #gets unique user id of that particular user
+        #other_user = User.objects.get(pk=usid) # searches user of that unique usid
+        #Friend.objects.add_friend(
+        #request.user,other_user,message='Hi!! Wanna hang in.')
+        f.sendFriendRequest(my_email,friend_email)
+        return HttpResponse("Friend request sent")   #Sends friends request
 
     else:
         return render(request,'litmus/send_friend_request.html')
 
-def receive_friend_request(request):
-    usid = User.objects.get(email=request.user.email).id
-    friend_request = FriendshipRequest.objects.get(to_user=usid)
+def accept_friend_request(request):
+    usid = User.objects.get(email=request.user.email).id  # to get unqiue id of user of that particular email
+    friend_request = FriendshipRequest.objects.get(to_user=usid)  # sending friend request to particular user
     friend_request.accept();
     return HttpResponse("Friend request accepted")
 
 def incoming_friend_request(request):
-    return render(request,'litmus/friend_request.html')
+    my_email = request.user.email
+    list = f.pendingFriendRequest(my_email)
+    name=[]
+    for friend in list:
+        name.append(User.objects.get(email=friend).profile.first_name)
+    #print(name)
+    #list = Friend.objects.unrejected_requests(request.user.email)
+    return render(request,'litmus/friend_request.html',{'list':name}) #Rendering friend requests yet to be accepted
 
 def show_friends(request):
     list = Friend.objects.friends(request.user)
-    return render(request,'litmus/show_friends.html',{'list':list})
+    return render(request,'litmus/show_friends.html',{'list':list}) # rendering template for showing list of friends

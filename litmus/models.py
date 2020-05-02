@@ -1,3 +1,12 @@
+""" Two models classes are created here:
+1) Profile : It maps one-one relation with "user" class and stores data into sqlite dadtabase.
+             Hence its data is accessible from admin portal only by superusers.
+
+2)CustomUser: It's an abstract class that was created on purpose to done away with necessary username requirement ,
+              instead use email to authenticate user. So it changes autheticate fields from (username , password)
+              to (email,password).
+"""
+
 from django.db import models
 #from django.contrib.auth.models import User
 from django.conf import settings
@@ -10,7 +19,6 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
-
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)

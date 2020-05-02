@@ -15,7 +15,7 @@ urlpatterns= [
   path('logout/',views.logout_view,name='logout'),
   path('send_request/',views.send_friend_request,name='friend_request_sent'),
   path('friend_requests/',views.incoming_friend_request,name='incoming_friend_request'),
-  path('accept/',views.receive_friend_request,name='friend_request'),
+  path('accept/',views.accept_friend_request,name='friend_request'),
   path('show_friends',views.show_friends,name='show_friends'),
 ]
 

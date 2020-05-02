@@ -1,3 +1,6 @@
+""" When a new user registers, a unique token is generated eveytime which in turn generates new link for homepage,
+    which is then sent as a mail to registered user e-mail. """
+
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from six import text_type
 
