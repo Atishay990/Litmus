@@ -38,7 +38,7 @@ def home_view(request):
 
 def index(request):
     #return render(request,'litmus/front-page.html')
-    return render(request, 'litmus/index.html', {'signup_form': SignUpForm()})
+    return render(request, 'litmus/front-page.html', {'signup_form': SignUpForm()})
 
 
 @login_required(login_url ='/litmus/login/')
@@ -122,7 +122,7 @@ def login_view(request):
             #print("They used email: {} and password: {}".format(email,password))
             return HttpResponse("Invalid login details given")
     else:
-        return render(request, 'litmus/login.html', {})
+        return render(request, 'litmus/front-page.html', {})
 
 def send_friend_request(request):
 

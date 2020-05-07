@@ -7,9 +7,9 @@ from django.conf import settings
 urlpatterns= [
  # path('',views.index, name='index'),
   path('homepage/',views.home_view,name='home'),
-  path('',views.index,name='index'),
+  #path('',views.index,name='index'),
   path('signup/',views.signup_view,name='signup'),
-  path('login/',views.login_view,name='login'),
+  path('',views.login_view,name='login'),
   path('sent/',views.activation_sent_view,name='activation_sent'),
   path('activate/<slug:uidb64>/<slug:token>/',views.activate,name='activate'),
   path('logout/',views.logout_view,name='logout'),
