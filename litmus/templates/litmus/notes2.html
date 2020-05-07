@@ -15,47 +15,29 @@
       <div class="friend-request">
           <button id="req-btn"><i class="fas fa-2x fa-user-friends req-ico"></i></button>
       </div>
+
       <div id="friend-req-area">
+        {% for friend in list %}
          <div class="friend-request-card">
+
             <div>
                <img src="/static/litmus/images/pro.png" class="req-img">
             </div>
-            {% load friendshiptags %}
             <div>
-               <h2 class="req-name">{% friend_requests request.user %}</h2>
+               <h2 class="req-name">{{friend}}</h2>
                <p class="req-ins">college name</p>
             </div>
 
-            <button class="accept"><i class="far fa-check-circle acc-rej"></i></button>
+            <button class="accept" ><i class="far fa-check-circle acc-rej"></i></button>
             <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
          </div>
+         
+          {% endfor %}
+       </div>
+
 
          <!-- FOR ILLUSTRATION OF MULTIPLE FRIEND REQUEST -->
 
-         <div class="friend-request-card">
-            <div>
-               <img src="/static/litmus/images/pro.png" class="req-img">
-            </div>
-            <div>
-               <h2 class="req-name">Friend Name</h2>
-               <p class="req-ins">college name</p>
-            </div>
-            <button class="accept"><i class="far fa-check-circle acc-rej"></i></button>
-            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
-         </div>
-
-         <div class="friend-request-card">
-            <div>
-               <img src="/static/litmus/images/pro.png" class="req-img">
-            </div>
-            <div>
-               <h2 class="req-name">Friend Name</h2>
-               <p class="req-ins">college name</p>
-            </div>
-            <button class="accept"><i class="far fa-check-circle acc-rej"></i></button>
-            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
-         </div>
-         </div>
 
       </div>
       <section>
@@ -190,3 +172,4 @@
 
 
    </body>
+</html>

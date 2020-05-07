@@ -28,6 +28,8 @@ from friendship.models import FriendshipRequest
 from .graphMap import friendGraph
 f  = friendGraph()
 
+
+
 """ decorators for pages that requires login of authorised user """
 
 @login_required(login_url='/litmus/login/')
@@ -140,7 +142,7 @@ def send_friend_request(request):
 def accept_friend_request(request):
     usid = User.objects.get(email=request.user.email).id  # to get unqiue id of user of that particular email
     friend_request = FriendshipRequest.objects.get(to_user=usid)  # sending friend request to particular user
-    friend_request.accept();
+    friend_request.accept()
     return HttpResponse("Friend request accepted")
 
 def incoming_friend_request(request):
@@ -151,8 +153,8 @@ def incoming_friend_request(request):
         name.append(User.objects.get(email=friend).profile.first_name)
     #print(name)
     #list = Friend.objects.unrejected_requests(request.user.email)
-    return render(request,'litmus/friend_request.html',{'list':name}) #Rendering friend requests yet to be accepted
+    return render(request,'litmus/notes2.html',{'list':name}) #Rendering friend requests yet to be accepted
 
 def show_friends(request):
     list = Friend.objects.friends(request.user)
-    return render(request,'litmus/show_friends.html',{'list':list}) # rendering template for showing list of friends
+    return render(request,'litmus/show_friends.html',{'list':list}) # rendering template for showing list of friend
