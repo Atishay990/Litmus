@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+""" SignUpForm uses "User" class and also adds extra fields mentioned below """
+
 from . models import Profile
 
 class SignUpForm(UserCreationForm):
@@ -34,12 +36,6 @@ class SignUpForm(UserCreationForm):
 
         self.fields['password1'].widget.attrs['placeholder'] = 'Enter Password'
         self.fields['password1'].widget.attrs['class'] = 'input-field'
-#
+
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].widget.attrs['class'] = 'input-field'
-
-#class LogInForm(forms.ModelForm):
-    #email = forms.EmailField(max_length=150,help_text='Email')
-    #class Meta:
-    #    model = User
-    #    fields = ('email','password1',)

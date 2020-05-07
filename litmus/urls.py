@@ -13,6 +13,10 @@ urlpatterns= [
   path('sent/',views.activation_sent_view,name='activation_sent'),
   path('activate/<slug:uidb64>/<slug:token>/',views.activate,name='activate'),
   path('logout/',views.logout_view,name='logout'),
+  path('send_request/',views.send_friend_request,name='friend_request_sent'),
+  path('friend_requests/',views.incoming_friend_request,name='incoming_friend_request'),
+  path('friend_requests/accept/',views.accept_friend_request,name='friend_request'),
+  path('show_friends',views.show_friends,name='show_friends'),
 ]
 
 urlpatterns += static((settings.STATIC_URL), document_root=(settings.STATIC_ROOT))

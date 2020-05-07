@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'friendship',
 ]
 
 MIDDLEWARE = [
@@ -150,5 +151,5 @@ EMAIL_PORT = 587
 #LOGIN_URL = 'litmus/login/'
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+# https:/docs.djangoproject.com/en/2.2/howto/static-files/
 AUTH_USER_MODEL = 'litmus.CustomUser'
