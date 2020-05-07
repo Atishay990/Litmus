@@ -139,22 +139,37 @@ def send_friend_request(request):
     else:
         return render(request,'litmus/send_friend_request.html')
 
-def accept_friend_request(request):
-    usid = User.objects.get(email=request.user.email).id  # to get unqiue id of user of that particular email
-    friend_request = FriendshipRequest.objects.get(to_user=usid)  # sending friend request to particular user
-    friend_request.accept()
-    return HttpResponse("Friend request accepted")
+def accept_friend_request(request): 
+    if request.method == 'GET':
+        friend_email = request.GET.get('friend_email')
+        my_email = request.user.email
+        print(friend_email)
+        f.acceptFriendRequest(friend_email,my_email)
+        return HttpResponse("friend request accepted")
+        
+
+    
+
+    #usid = User.objects.get(email=request.user.email).id  # to get unqiue id of user of that particular email
+    #friend_request = FriendshipRequest.objects.get(to_user=usid)  # sending friend request to particular user
+    #friend_request.accept()
+    #return HttpResponse("Friend request accepted")
 
 def incoming_friend_request(request):
+    friendDict={}
     my_email = request.user.email
-    list = f.pendingFriendRequest(my_email)
-    name=[]
-    for friend in list:
-        name.append(User.objects.get(email=friend).profile.first_name)
+    email_list = f.pendingFriendRequest(my_email)
+    name_list=[]
+    for friend in email_list:
+        name_list.append(User.objects.get(email=friend).profile.first_name)
+    
+    friendDict = dict(zip(name_list,email_list))
+
+    
     #print(name)
     #list = Friend.objects.unrejected_requests(request.user.email)
-    return render(request,'litmus/notes2.html',{'list':name}) #Rendering friend requests yet to be accepted
+    return render(request,'litmus/notes2.html',{'friendDict':friendDict}) #Rendering friend requests yet to be accepted
 
 def show_friends(request):
-    list = Friend.objects.friends(request.user)
+    list = f.friend_list(request.user.email)
     return render(request,'litmus/show_friends.html',{'list':list}) # rendering template for showing list of friend
