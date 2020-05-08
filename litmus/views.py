@@ -28,13 +28,60 @@ from friendship.models import FriendshipRequest
 from .graphMap import friendGraph
 f  = friendGraph()
 
+from. models import Notes ,Profile
+from datetime import datetime
 
 
 """ decorators for pages that requires login of authorised user """
 
 @login_required(login_url='/litmus/login/')
 def home_view(request):
-    return render(request,'litmus/home.html')
+
+    return render(request,'litmus/notes2.html')
+
+
+def add(request):
+    # Saving newly added notes from the homepage 
+    title = request.GET.get('title')
+    newnote = request.GET.get("newnote")
+    print(newnote)
+    user_id = User.objects.get(email=request.user.email).id
+    user_profile = get_object_or_404(Profile, pk = user_id)
+    n = Notes()
+    n.user_profile = user_profile
+    n.note_title = title
+    n.note_body = newnote
+    n.save()
+    #latestnote = n.diary_notes
+    print("notes saved")
+    return HttpResponse("successful")
+    #return redirect('/litmus/homepagedemo/' + str(user_id) + '/')
+
+def show_notes(request):
+    try:
+        # Selecting the latest note
+        user_id = User.objects.get(email=request.user.email).id
+        all_notes = Notes.objects.filter(user_profile = user_id)
+        all_notes = list(all_notes)
+        #if len(all_notes) == 0:
+        #    return redirect('litmus/homepagedemo/errors/400/')
+        all_notes.sort(key = lambda x : datetime.strptime(str(x.create_time), '%Y-%m-%d %H:%M:%S.%f%z'), reverse = True)
+        #latestnote = all_notes[0].diary_notes
+        #print(latestnote)
+        return render(request, 'litmus/notes_list.html', 
+                     {'all_notes': all_notes})
+    except(KeyError, Notes.DoesNotExist):
+        latestnote = 'No notes yet! Go ahead and create your first note !'
+        
+    else:
+        # Passing selected note tobe displayed on basic HTML page
+        return HttpResponse("No notes to show")
+
+
+def errors(request, error_code):
+    print("Hey here\n\n")
+    return render(request, 'homepage/homepageerror.html', 
+                 {'error_code' : error_code,})   
 
 def index(request):
     #return render(request,'litmus/front-page.html')
@@ -121,7 +168,7 @@ def login_view(request):
             print("Someone tried to login and failed.")
             #print("They used email: {} and password: {}".format(email,password))
             return HttpResponse("Invalid login details given")
-    else:
+    else: 
         return render(request, 'litmus/front-page.html', {})
 
 def send_friend_request(request):

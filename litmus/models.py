@@ -39,6 +39,7 @@ class Profile(models.Model):
         instance.profile.save()
 
 
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True)
     is_staff = models.BooleanField(
@@ -69,3 +70,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class Notes(models.Model):
+    user_profile = models.ForeignKey(Profile,on_delete = models.CASCADE)
+    note_title = models.TextField(blank = False, default= "Title")
+    note_body = models.TextField(blank = False)
+    create_time = models.DateTimeField(auto_now_add=True)

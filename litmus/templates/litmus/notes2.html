@@ -93,6 +93,25 @@
 <div id="message">
    <span id="remain">0</span><span id="complete">   characters remaining</span>
  </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+            <script type="text/javascript">
+
+            $('#button-create').click(function(){
+   
+               $.ajax({
+                  type:"GET",
+                  url: "add/",
+                  data:{
+                     title:$('#title').val(),
+                     newnote:$('#textin').val()
+                  },
+                  success:function(){
+   
+                  }
+               });
+            });
+      
+         </script>
 </form>
 </div>
 <div id="friend-post">
@@ -189,6 +208,6 @@
      </div>
          <script src="/static/litmus/js/notes2.js"></script>
 
-
+    <a href ="notes_list/"> click karo idhar </a>
    </body>
 </html>
