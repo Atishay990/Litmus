@@ -6,10 +6,10 @@ from django.conf import settings
 
 urlpatterns= [
  # path('',views.index, name='index'),
-  path('homepage/',views.home_view,name='home'),
+  path('',views.home_view,name='home'),
   #path('',views.index,name='index'),
-  #path('signup/',views.signup_view,name='signup'),
-  path('',views.login_view,name='login'),
+  path('signup/',views.signup_view,name='signup'),
+  #path('',views.login_view,name='login'),
   path('sent/',views.activation_sent_view,name='activation_sent'),
   path('activate/<slug:uidb64>/<slug:token>/',views.activate,name='activate'),
   path('logout/',views.logout_view,name='logout'),
@@ -17,8 +17,8 @@ urlpatterns= [
   path('friend_requests/',views.incoming_friend_request,name='incoming_friend_request'),
   path('friend_requests/accept/',views.accept_friend_request,name='friend_request'),
   path('show_friends',views.show_friends,name='show_friends'),
-  path('homepage/add/',views.add,name='add'),
-  path('homepage/notes_list/',views.show_notes,name ='show_notes')
+  path('add/',views.add,name='add'),
+  path('notes_list/',views.show_notes,name ='show_notes')
 ]
 
 urlpatterns += static((settings.STATIC_URL), document_root=(settings.STATIC_ROOT))

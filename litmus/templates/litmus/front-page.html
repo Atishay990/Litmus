@@ -47,7 +47,7 @@
                     &nbsp;
                     <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
                     &nbsp;&nbsp;
-                    <button type="submit" class="submit-btn">Log in</button>
+                    <button type="submit" name="submit" class="submit-btn" value="login">Log in</button>
                     <a class="psw" href="#">Forgot Password ?</a>
 
                 </form>
@@ -58,7 +58,7 @@
                      {{fields}}
                    {% endfor %}
 
-                    <button type="submit" class="submit-btn">Register</button>
+                    <button type="submit" name="submit" class="submit-btn" value="register">Register</button>
                 </form>
 
             </div>
@@ -86,6 +86,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
         <script>
             var x = document.getElementById("login");
@@ -98,7 +99,6 @@
                 y.style.left = "50px";
                 z.style.left = "110px";
 
-               
 
             }
             function login(){
