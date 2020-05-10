@@ -118,9 +118,53 @@ cursor:pointer;
   color:rgb(38, 9, 56);
   background-color: rgba(235, 222, 222, 0.911);
 }
+#public-button
+{
+  cursor:pointer;
+  margin-top:90px;
+  margin-left: -480px;
+  height:40px;
+  padding-left:24px;
+  padding-right:24px;
+  font-size:20px;
+  color:#FFF;
+  position: absolute;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+
+}
+#private-button
+{cursor:pointer;
+  margin-top:90px;
+  margin-left:-610px;
+  height:40px;
+  padding-left:24px;
+  padding-right:24px;
+  font-size:20px;
+  color:#FFF;
+  position: absolute;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+
+}
+#public-button:hover{
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
+
+}
+#private-button:hover{
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
+  
+}
 #remain {
   font-size: 20px;
   font-family: sans-serif;
+  margin-left: 450px;
 }
 #complete{
   font-size: 16px;
@@ -211,8 +255,9 @@ cursor:pointer;
 
 
 #selected-font:hover{
-  background-color:rgb(114, 101, 122);
-  color: #fff;
+  background-color: rgba(235, 222, 222, 0.911);
+  color: rgb(235,28,36);
+  
 }
 
 .trending-post-container
@@ -230,11 +275,7 @@ cursor:pointer;
   height: 50px;
   width: 50px;
   cursor: pointer;
-  
-
-
  color:#fff;
-
   background-color:rgb(38, 9, 56);
   border-radius: 620px;
   outline: none;
@@ -248,7 +289,6 @@ cursor:pointer;
 {
   position: absolute;
   margin-top: 200px;
-
   height: 50px;
   width: 50px;
   margin-left: 800px;
@@ -322,7 +362,7 @@ cursor:pointer;
   margin-left: 40px;
 
   
-  color: grey;
+  color: white;
   font-size: 18px;
 }
 #post-button{
@@ -364,9 +404,7 @@ cursor:pointer;
 
 }
 .prof
-{
-  
-  
+{ 
   border: 4px solid;
   border-color: #F2AA4CFF;
   height: 150px;
@@ -481,6 +519,13 @@ cursor:pointer;
   border: #FFF 1px solid;
   border-radius: 10px;
 }
+.friend-request1{
+  position: absolute;
+  right: 15px;
+  top: 80px;
+  border: #FFF 1px solid;
+  border-radius: 10px;
+}
 .req-ico{
   cursor: pointer;
 }
@@ -488,8 +533,16 @@ cursor:pointer;
 .friend-request:hover{
   background-color: #fff;
 }
+.friend-request1:hover{
+  background-color: #fff;
+}
 
 #req-btn{
+  padding: 2px;
+  background: 0;
+  border: none;
+}
+#req-btn1{
   padding: 2px;
   background: 0;
   border: none;
@@ -503,11 +556,18 @@ cursor:pointer;
   z-index: 10;
 }
 
+#friend-req-area1{
+  display: none;
+  right: 15px;
+  top: 120px;
+  position: absolute;
+  z-index: 10;
+}
+
 .friend-request-card{
   
   display: flex;
   justify-content: space-between;
-
   background-color: #FFF;
   padding: 15px;
   margin-top: 4px;
@@ -532,9 +592,39 @@ cursor:pointer;
   padding: 0 10px 0 10px;
 }
 
+.req-name1{
+  font-size: 16px;
+  margin-right: 110px; 
+}
+
+#req-ins1{
+  font-size: 12px;
+  margin-right: 110px;
+}
+
+#send-req-btn {
+  cursor:pointer;
+  height:35px;
+  font-size:15px;
+  margin-left: 160px;
+  color:#FFF;
+  position: absolute;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+  padding-left:16px;
+  padding-right:16px;
+}
+#send-req-btn:hover{
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
+}
+
 .accept{
   background: 0;
   border: 0;
+
 }
 
 .reject{
@@ -545,6 +635,7 @@ cursor:pointer;
 .acc-rej:hover{
   border-radius: 50%;
   background:#F2AA4CFF;
+  color: black;
 }
 
 
@@ -557,14 +648,12 @@ cursor:pointer;
   font-size: 18px;
   border: none;
   outline: none;
-  background-color: #422057FF ;
+  background-color: #422057FF;
   color: white;
   cursor: pointer;
   padding: 15px;
   border-radius: 4px;
 }
-
-
 #myBtnscroll:hover {
   background-color:rgba(66, 32, 87, 0.678);
 
@@ -576,9 +665,25 @@ cursor:pointer;
   padding: 3px;
 }
 /*  arrow */
-
-
 .up {
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
+}
+.logout_btn {
+  border: none; 
+  color: white; 
+  height:40px;
+  padding-left:24px;
+  padding-right:24px;
+  font-size:20px; 
+  cursor: pointer; 
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  margin-top: 10px;
+  margin-left: 10px;
+  outline: none;
+}
+.logout_btn:hover {
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
 }
