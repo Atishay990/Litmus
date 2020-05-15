@@ -533,20 +533,14 @@ cursor:pointer;
 .friend-request:hover{
   background-color: #fff;
 }
-.friend-request1:hover{
-  background-color: #fff;
-}
+
 
 #req-btn{
   padding: 2px;
   background: 0;
   border: none;
 }
-#req-btn1{
-  padding: 2px;
-  background: 0;
-  border: none;
-}
+
 
 #friend-req-area{
   display: none;
@@ -556,13 +550,7 @@ cursor:pointer;
   z-index: 10;
 }
 
-#friend-req-area1{
-  display: none;
-  right: 15px;
-  top: 120px;
-  position: absolute;
-  z-index: 10;
-}
+
 
 .friend-request-card{
   
@@ -592,15 +580,7 @@ cursor:pointer;
   padding: 0 10px 0 10px;
 }
 
-.req-name1{
-  font-size: 16px;
-  margin-right: 110px; 
-}
 
-#req-ins1{
-  font-size: 12px;
-  margin-right: 110px;
-}
 
 #send-req-btn {
   cursor:pointer;
@@ -669,6 +649,9 @@ cursor:pointer;
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
 }
+
+/*Logout button*/
+
 .logout_btn {
   border: none; 
   color: white; 
@@ -688,7 +671,7 @@ cursor:pointer;
   background-color: rgba(235, 222, 222, 0.911);
 }
 
-
+/*Date Picker*/
 
 [type="date"] {
   background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
@@ -708,3 +691,57 @@ cursor:pointer;
   width: 180px;
   margin-left: 20px;
 }
+
+/*Search Box*/
+    
+   .wrapper {
+  position: absolute;
+  top: 14.5%;
+  left: 87.5%;
+  transform: translate(-50%, -50%);
+}
+
+.search-box {
+  width: 450px;
+  height: 100px;
+  position: relative;
+}
+
+.search {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  box-sizing: border-box;
+  width: 0px;
+  height: 50px;
+  padding: 0 20px;
+  outline: none;
+  font-size: 18px;
+  border-radius: 50px;
+  color: rgb(50,23,77);
+  border: 3px solid rgb(50,23,77);
+  transition: all 0.8s ease;
+}
+.search-btn {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgb(50,23,77);
+  border-radius: 50%;
+  right: 45px;
+  top: 10px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.8s ease;
+}
+
+.search.active {
+  width: 280px;
+  right: 100px;
+}
+
+
+
