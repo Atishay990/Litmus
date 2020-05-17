@@ -1,0 +1,169 @@
+*{
+  margin:0;
+  padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: #F2AA4CFF;
+    font-family: "montserrat";
+}
+#post
+{
+  display: inline-block;
+  position: relative;
+  top: 60px;
+  margin-top: -1000px;
+  margin-left: calc(33vw);
+  margin-bottom: 100px;
+}
+.paper {
+    position: relative;
+    
+    width: 500px;
+    height: 480px;
+    margin:auto;
+    background: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    overflow: hidden;
+}
+.paper:before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 45px;
+    background: radial-gradient(#F2AA4CFF 6px, transparent 7px) repeat-y;
+    background-size: 30px 30px;
+    border-right: 3px solid black;
+    box-sizing: border-box;
+}
+
+.paper-content {
+    position: absolute;
+    top: 60px; right: 10px; bottom: 20px; left: 45px;
+}
+.content {
+  font-size: 20px;
+  line-height: 1.6;
+  text-align: center;
+  font-family: cursive;
+  margin: auto;
+}
+.title {
+  margin: auto;
+  text-align: center;
+  font-size: 36px;
+}
+
+.date {
+  font-size: 22px;
+}
+
+#read-more
+{
+  left: 33%;
+  top: 93%;
+  cursor:pointer;
+  height:40px;
+  font-size:20px;
+  width: 130px;
+  color:#FFF;
+  position: absolute;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+}
+#read-more:hover{
+  color: black;
+  background-color: #F2AA4CFF;
+
+}
+.date {
+  margin-bottom: 10px;
+}
+
+
+
+.pro-image
+{
+  height: 110px;
+  width: 110px;
+  border-radius: 100%;
+  position: relative;
+  margin-left: 130px;
+  margin-top: 40px;
+
+}
+.person-name
+{
+  text-align: center;
+}
+p
+{
+  text-align: center;
+
+
+}
+.proc
+{height: 250px;
+
+  border-bottom: black solid 5px;
+}
+.left-panel
+{
+  position: relative;
+  width: 30%;
+  height: 1000px;
+
+}
+.pro-fri
+{
+  
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  margin-left: 50px;
+}
+.fri-name
+{
+  font-size: 22px;
+  display: inline-block;
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 10px;
+  
+
+}
+.fri{
+  margin-top: 20px;
+  width: 100%;
+  height: 60px;
+  
+
+}
+.coll-name
+{
+  display: inline;
+  margin-left: 20px;
+}
+.more{
+  cursor:pointer;
+  height:40px;
+  padding-left:24px;
+  padding-right:24px;
+  margin-left: 100px;
+  margin-top: 30px;
+  font-size:20px;
+  color:#FFF;
+  position: relative;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+}
+.more:hover{
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
+}
