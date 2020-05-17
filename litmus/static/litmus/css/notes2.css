@@ -118,6 +118,49 @@ cursor:pointer;
   color:rgb(38, 9, 56);
   background-color: rgba(235, 222, 222, 0.911);
 }
+#public-button
+{
+  cursor:pointer;
+  margin-top:90px;
+  margin-left: -480px;
+  height:40px;
+  padding-left:24px;
+  padding-right:24px;
+  font-size:20px;
+  color:#FFF;
+  position: absolute;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+
+}
+#private-button
+{cursor:pointer;
+  margin-top:90px;
+  margin-left:-610px;
+  height:40px;
+  padding-left:24px;
+  padding-right:24px;
+  font-size:20px;
+  color:#FFF;
+  position: absolute;
+  background-color:rgb(38, 9, 56);
+  border-radius: 620px;
+  outline: none;
+  border: none;
+
+}
+#public-button:hover{
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
+
+}
+#private-button:hover{
+  color:rgb(38, 9, 56);
+  background-color: rgba(235, 222, 222, 0.911);
+  
+}
 #remain {
   font-size: 20px;
   font-family: sans-serif;
