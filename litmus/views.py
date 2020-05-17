@@ -32,6 +32,7 @@ from. models import Notes ,Profile
 from datetime import datetime
 
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 
 
 """ decorators for pages that requires login of authorised user """
@@ -45,14 +46,15 @@ def home_view(request):
 def add(request):
     # Saving newly added notes from the homepage 
     title = request.GET.get('title')
-    newnote = request.GET.get("newnote")
-    print(newnote)
+    newnote = request.GET.get('newnote')
+    date = timezone.now()
     user_id = User.objects.get(email=request.user.email).id
     user_profile = get_object_or_404(Profile, pk = user_id)
     n = Notes()
     n.user_profile = user_profile
     n.note_title = title
     n.note_body = newnote
+    n.create_time = date
     n.save()
     #latestnote = n.diary_notes
     print("notes saved")

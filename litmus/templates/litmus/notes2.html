@@ -3,7 +3,7 @@
    <head>
       <title>note box</title>
       <link rel="stylesheet" type="text/css" href="/static/litmus/css/style.css">
-      <link rel="stylesheet" type="text/css" href="/static/litmus/css/notes2.css">
+     
       <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
+      <link rel="stylesheet" type="text/css" href="/static/litmus/css/notes2.css">
 
    </head>
    <body>
@@ -85,7 +85,7 @@
          <form novalidate onsubmit="return limiter.save();"></form>
 
          <div id="margin"><span style="font-weight: bold; font-size: 25px;">Title:&emsp;</span> <input id="title" type="text" name="title" spellcheck="false">
-         	<input type="date" name="dateofpost" id="dateofpost">
+         	
          <button class="tools" onclick="displayTools()"><i class="fas fa-pen-alt fa-2x"></i></button>
 
 
@@ -128,7 +128,7 @@
                   data:{
                      title:$('#title').val(),
                      newnote:$('#textin').val(),
-                     dateofpost:$('#dateofpost').val(),
+                     
                   },
                   success:function(){
    

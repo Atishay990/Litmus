@@ -33,7 +33,7 @@
     
     <section id="post">
         {% for note in all_notes %}
-      <p class="date">Date: dd/mm/yyyy</p>
+      <p class="date">{{note.create_time}}</p>
 <div class="paper">
 	<h1 class="title">{{note.note_title}}</h1>
     <div class="paper-content">
@@ -42,7 +42,7 @@
     </div>
 </div>
 <br/><br/><br/>
-<p class="date">Date: dd/mm/yyyy</p>
+
  {% endfor %}
 </section>
 
