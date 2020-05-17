@@ -6,10 +6,29 @@
       <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 
    </head>
    <body>
+
+   	<button class="logout_btn"><i class="fas fa-sign-out-alt"></i>Logout</button>
+
+
+    <div class="wrapper">
+  <div class="search-box">
+     <input type="email" placeholder="Enter Friend's Email" class="search">
+     <div class="search-btn">
+       <i class="fa fa-search" aria-hidden="true"></i>
+     </div>
+  </div>
+</div>
+
+
+
       <section id="main-page">
     <div>
       <div class="friend-request">
@@ -65,6 +84,7 @@
          <form novalidate onsubmit="return limiter.save();"></form>
 
          <div id="margin"><span style="font-weight: bold; font-size: 25px;">Title:&emsp;</span> <input id="title" type="text" name="title" spellcheck="false">
+         	<input type="date" name="dateofbirth" id="dateofbirth">
          <button class="tools" onclick="displayTools()"><i class="fas fa-pen-alt fa-2x"></i></button>
 
 
@@ -90,6 +110,9 @@
 
 
 <input id="button-create" type="submit" value="Create">
+<span><input id="public-button" type="submit" value="public">
+   <h1 style="display: inline;margin-left: -505px;position: absolute;margin-top: 80px;color: white;font-size: 50px;">/</h1>
+<input id="private-button" type="submit" value="private"></span>
 <div id="message">
    <span id="remain">0</span><span id="complete">   characters remaining</span>
  </div>

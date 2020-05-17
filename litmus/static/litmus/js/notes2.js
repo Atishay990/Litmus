@@ -112,3 +112,10 @@ function selectedFontremove(){
   selectedFont();
   font_selection_region.style.display="none";
 }
+
+/*Search box*/
+$(".search-btn").click(function(){
+  $(".search").toggleClass("active").focus;
+ 
+  $(".search").val("");
+});
