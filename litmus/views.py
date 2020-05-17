@@ -65,13 +65,21 @@ def show_notes(request):
         user_id = User.objects.get(email=request.user.email).id
         all_notes = Notes.objects.filter(user_profile = user_id)
         all_notes = list(all_notes)
+        first_name = User.objects.get(email=request.user.email).profile.first_name
+        last_name = User.objects.get(email=request.user.email).profile.last_name
+        name = first_name+" "+last_name
         #if len(all_notes) == 0:
         #    return redirect('litmus/homepagedemo/errors/400/')
         all_notes.sort(key = lambda x : datetime.strptime(str(x.create_time), '%Y-%m-%d %H:%M:%S.%f%z'), reverse = True)
         #latestnote = all_notes[0].diary_notes
         #print(latestnote)
-        return render(request, 'litmus/notes_list.html', 
-                     {'all_notes': all_notes})
+        f_list = f.friend_list(request.user.email)
+        name_list=[]
+        for friend in f_list:
+            name_list.append(User.objects.get(email=friend).profile.first_name)
+
+        return render(request, 'litmus/posts.html', 
+                     {'all_notes': all_notes,'name':name,'f_list':name_list})
     except(KeyError, Notes.DoesNotExist):
         latestnote = 'No notes yet! Go ahead and create your first note !'
         

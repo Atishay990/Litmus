@@ -77,3 +77,6 @@ class Notes(models.Model):
     note_title = models.TextField(blank = False, default= "Title")
     note_body = models.TextField(blank = False)
     create_time = models.DateTimeField(auto_now_add=True)
+    no_of_likes = models.IntegerField(default = 0)
+    is_public = models.BooleanField(default = False)
+

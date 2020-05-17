@@ -11,75 +11,39 @@
  
        <div class="left-panel">
            <div class="proc">
-               <img class="pro-image" src="pro.png">
+               <img class="pro-image" src="/static/litmus/images/pro.png">
                <h1 class="person-name">
-                   Narendra Modi
+                   {{name}}
                </h1>
                <p>Indian Institute of Information Technology</p>
            </div>
+           {% for friend in f_list %}
            <div class="fri">
-           <img class="pro-fri"   src="pro.png">
+           <img class="pro-fri"   src="/static/litmus/images/pro.png">
            
-           <h1 class="fri-name">Barack obama</h1>
-          <p class="coll-name">College name</p>
+           <h1 class="fri-name">{{friend}}</h1>
+          <p class="coll-name">IIITV</p>
         
            </div>
-           <div class="fri">
-            <img class="pro-fri"   src="pro.png">
-            <h1 class="fri-name">Theodre Roosevelt</h1>
-            <p class="coll-name">College name</p>
-
-            
-            </div>
-            <div class="fri">
-                <img class="pro-fri"   src="pro.png">
-                <h1 class="fri-name">Abraham Lincoln</h1>
-                <p class="coll-name">College name</p>
-                
-                </div>
-                <div class="fri">
-                    <img class="pro-fri"   src="pro.png">
-                    <h1 class="fri-name">George Bush</h1>
-                    
-                    <p class="coll-name">College name</p>                    </div>
-                    <div class="fri">
-                        <img class="pro-fri"   src="pro.png">
-                        <h1 class="fri-name">Donald Trump</h1>
-                        <p class="coll-name">College name</p>
-                        </div>
-                        <div class="fri">
-                            <img class="pro-fri"   src="pro.png">
-                            <h1 class="fri-name">Richard Nixon</h1>
-                            <p class="coll-name">College name</p>
-                            </div>
-                            <div class="fri">
-                                <img class="pro-fri"   src="pro.png">
-                                <h1 class="fri-name">John F kennedy</h1>
-                                <p class="coll-name">College name</p>
-                                </div>
-        <button class="more">More Friends</button>
+           {% endfor %}
+           <button class="more">More Friends</button>
 
        </div>
  
     
     <section id="post">
+        {% for note in all_notes %}
       <p class="date">Date: dd/mm/yyyy</p>
 <div class="paper">
-	<h1 class="title">Title</h1>
+	<h1 class="title">{{note.note_title}}</h1>
     <div class="paper-content">
-        <p class="content">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p> 
+        <p class="content">{{note.note_body}}</p> 
         <input id="read-more" type="submit" value="Read More..">
     </div>
 </div>
 <br/><br/><br/>
 <p class="date">Date: dd/mm/yyyy</p>
-<div class="paper">
-	<h1 class="title">Title</h1>
-    <div class="paper-content">
-        <p class="content">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p> 
-        <input id="read-more" type="submit" value="Read More..">
-    </div>
-</div>
+ {% endfor %}
 </section>
 
 </body>
