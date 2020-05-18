@@ -16,16 +16,36 @@
    </head>
    <body>
 
-   	<button class="logout_btn"><i class="fas fa-sign-out-alt"></i>Logout</button>
+      <a href="logout/"  class="logout_btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i>Logout</button></a>
+      
+      
 
 
     <div class="wrapper">
   <div class="search-box">
-     <input type="email" placeholder="Enter Friend's Email" class="search">
-     <div class="search-btn">
+     <input type="email" id="friend-email" placeholder="Enter Friend's Email" class="search">
+     <div class="search-btn" id = "src-btn">
        <i class="fa fa-search" aria-hidden="true"></i>
      </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $('#src-btn').click(function(){
+
+     $.ajax({
+        type:"GET",
+        url: "send_request/",
+        data:{
+           email:$('#friend-email').val(),
+        },
+        success:function(){
+
+        }
+     });
+  });
+
+</script>
 </div>
 
 
@@ -111,7 +131,7 @@
 
 
 <input id="button-create" type="submit" value="Create">
-<span><input id="public-button" type="submit" value="public">
+<span><input id="public-button" type="submit" value="Public">
    <h1 style="display: inline;margin-left: -505px;position: absolute;margin-top: 80px;color: white;font-size: 50px;">/</h1>
 <input id="private-button" type="submit" value="private"></span>
 <div id="message">
@@ -135,6 +155,20 @@
                   }
                });
             });
+
+            $('#public-button').click(function(){
+   
+            $.ajax({
+            type:"GET",
+            url: "postIsPublic/",
+            data:{
+              isPublic:$('#public-button').val(),
+           },
+           success:function(){
+
+            }
+          });
+        });
       
          </script>
 </form>
@@ -186,7 +220,24 @@
          <a href="#" class="full-post">View full post</a>
       </div>
    </div>
-   <button type="submit">See All Friends</button>
+   <a href="friend-posts/"  button type="submit" id="friend-post">See All Friends</a>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+            <script type="text/javascript">
+
+            $('#friend-post').click(function(){
+   
+               $.ajax({
+                  type:"GET",
+                  url: "friend-posts/",
+                  data:{
+                  },
+                  success:function(){
+   
+                  }
+               });
+            });
+         </script>
+
 </div>
 </div>
 </section>

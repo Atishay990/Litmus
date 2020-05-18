@@ -39,8 +39,17 @@ from django.utils import timezone
 
 @login_required(login_url='/litmus/signup/')
 def home_view(request):
+    friendDict={}
+    my_email = request.user.email
+    email_list = f.pendingFriendRequest(my_email)
+    name_list=[]
+    for friend in email_list:
+        name_list.append(User.objects.get(email=friend).profile.first_name)
+    
+    friendDict = dict(zip(name_list,email_list))
 
-    return render(request,'litmus/notes2.html')
+    #return render(request,'litmus/notes2.html')
+    return render(request,'litmus/notes2.html',{'friendDict':friendDict})
 
 
 def add(request):
@@ -99,11 +108,22 @@ def index(request):
     #return render(request,'litmus/front-page.html')
     return render(request, 'litmus/index.html', {'signup_form': SignUpForm()})
 
+def public_post(request):
+    if(request.GET.get('isPublic')=='Public'):
+        n = Notes()
+        n.is_public = True
+        return HttpResponse("post made public")
+
+def friend_posts(request):
+    friends = f.friend_list(request.user.email)
+    return render(request,"litmus/all_posts.html",{'friends':friends})
+
 
 @login_required(login_url ='/litmus/login/')
 def logout_view(request):
     logout(request)
     return render(request,'litmus/logout.html')
+    #return HttpResponse("logged out")
 
 def activation_sent_view(request):
     return render(request,'litmus/activation_sent.html')
@@ -139,9 +159,7 @@ def signup_view (request):
                 user.profile.first_name = form.cleaned_data.get('first_name')
                 user.profile.last_name = form.cleaned_data.get('last_name')
                 user.email = form.cleaned_data.get('e_mail')
-                #user.profile.email = form.cleaned_data.get('email')
-                #user.profile.password1 = form.cleaned_data.get('password1')
-                # user can't login until link confirmed
+               
                 user.is_active = False
                 user.save()
                 current_site = get_current_site(request)
@@ -185,39 +203,19 @@ def signup_view (request):
 
         
 
-#def login_view(request):
-#    if request.method == 'POST':
-#        email = request.POST.get('email')
-#        password = request.POST.get('password')
-#        user = authenticate(email=email, password=password)
-#        if user is not None:
-#            if user.is_active:
-#                login(request,user)
-#                return HttpResponseRedirect(reverse('home'))
-#                #return redirect('home')
-#            else:
-#                return HttpResponse("Your account was inactive.")
-#        else:
-#            print("Someone tried to login and failed.")
-#           #print("They used email: {} and password: {}".format(email,password))
-#            return HttpResponse("Invalid login details given")
-#    else: 
-#        return render(request, 'litmus/front-page.html', {})
 
 def send_friend_request(request):
 
-    if request.method == 'POST':
-        friend_email = request.POST.get('email') # gets email entered by user to whom friend request has to be send
-        my_email  = request.user.email
-        #usid = User.objects.get(email=friend_email).id #gets unique user id of that particular user
-        #other_user = User.objects.get(pk=usid) # searches user of that unique usid
-        #Friend.objects.add_friend(
-        #request.user,other_user,message='Hi!! Wanna hang in.')
-        f.sendFriendRequest(my_email,friend_email)
-        return HttpResponse("Friend request sent")   #Sends friends request
+    #if request.method == 'POST':
+    friend_email = request.GET.get('email') # gets email entered by user to whom friend request has to be send
+    my_email  = request.user.email
+    f.sendFriendRequest(my_email,friend_email)
+    print(friend_email)
+    return render(request,'litmus/send_friend_request.html')
+    #return HttpResponse("Friend request sent")   #Sends friends request
 
-    else:
-        return render(request,'litmus/send_friend_request.html')
+    #else:
+    #    return render(request,'litmus/send_friend_request.html')
 
 def accept_friend_request(request): 
     if request.method == 'GET':

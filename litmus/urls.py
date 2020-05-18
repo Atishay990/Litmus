@@ -15,10 +15,13 @@ urlpatterns= [
   path('logout/',views.logout_view,name='logout'),
   path('send_request/',views.send_friend_request,name='friend_request_sent'),
   path('friend_requests/',views.incoming_friend_request,name='incoming_friend_request'),
-  path('friend_requests/accept/',views.accept_friend_request,name='friend_request'),
+  path('accept/',views.accept_friend_request,name='friend_request'),
   path('show_friends',views.show_friends,name='show_friends'),
   path('add/',views.add,name='add'),
-  path('notes_list/',views.show_notes,name ='show_notes')
+  #path('postIsPublic/add',views.add,name='add'),
+  path('notes_list/',views.show_notes,name ='show_notes'),
+  path('postIsPublic/',views.public_post,name='public_post'),
+  path('friend-posts/',views.friend_posts,name='friend_posts'),
 ]
 
 urlpatterns += static((settings.STATIC_URL), document_root=(settings.STATIC_ROOT))

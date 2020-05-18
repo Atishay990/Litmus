@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>note box</title>
+      <link rel="stylesheet" type="text/css" href="/static/litmus/css/style.css">
+     
+      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+      <link rel="stylesheet" type="text/css" href="/static/litmus/css/notes2.css">
+
+   </head>
+   <body>
+
+   
+
+
+
+      <section id="main-page">
+    <div>
+    
+      <div id="friend-req-area">
+        {% for fname,femail in friendDict.items %}
+         <div class="friend-request-card">
+
+            <div>
+               <img src="/static/litmus/images/pro.png" class="req-img">
+            </div>
+            <div>
+               <h2 class="req-name">{{fname}}</h2>
+               <p class="req-ins">college name</p>
+            </div>
+
+            <button class="accept" id="{{fname}}" value ="{{fname}}"><i class="far fa-check-circle acc-rej"></i></button>
+            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
+            
+         </div>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+            <script type="text/javascript">
+
+            $('#{{fname}}').click(function(){
+   
+               $.ajax({
+                  type:"GET",
+                  url: "accept/",
+                  data:{
+                     friend_email:'{{femail}}'
+                  },
+                  success:function(){
+   
+                  }
+               });
+            });
+      
+         </script>
+        
+          {% endfor %}
+       </div>
+
+
+         <!-- FOR ILLUSTRATION OF MULTIPLE FRIEND REQUEST -->
+
+
+      </div>
+      <section>
+         <div class="main-content">
+<div id="friend-post">
+   <h1 style="font-size: 30px;">Friend Post</h1>
+   {% for friend in friends %}
+   <div class="friend1 friend" >
+      <div class="border">
+         <div class="image">
+            <img src="/static/litmus/images/pro.png">
+         </div>
+         <div class="friend-name">
+            <h2>{{friend}}</h2>
+         </div>
+      </div>
+      <div class="friend-post">
+         <h2>Friend Post</h2>
+         <i class="far fa-thumbs-up"></i>
+         <a href="#" class="full-post">View full post</a>
+      </div>
+   </div>
+   {% endfor %}
+</div>
+</div>
+</section>
+      </section>
+
+
+       <div class="scroll-button">
+
+         <button onclick="topFunction()" id="myBtnscroll" title="Go to top"><i class="arrow up"></i></button>
+     </div>
+         <script src="/static/litmus/js/notes2.js"></script>
+
+   
+   </body>
+</html>
