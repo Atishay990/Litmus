@@ -23,7 +23,10 @@
 
     <div class="wrapper">
   <div class="search-box">
-     <input type="email" id="friend-email" placeholder="Enter Friend's Email" class="search">
+     <input type="email" id="friend-email"  placeholder="Enter Friend's Email" class="search">
+     <script type="text/javascript">
+     
+   </script>
      <div class="search-btn" id = "src-btn">
        <i class="fa fa-search" aria-hidden="true"></i>
      </div>
@@ -39,7 +42,11 @@
         data:{
            email:$('#friend-email').val(),
         },
-        success:function(){
+        success:function(data){
+           if(data)
+           {
+            
+           }
 
         }
      });
@@ -84,6 +91,7 @@
                      friend_email:'{{femail}}'
                   },
                   success:function(){
+                     alert("Friend Request accepted.")
    
                   }
                });
@@ -151,7 +159,10 @@
                      
                   },
                   success:function(){
-   
+                     alert("Post created.")
+                     $('#title').val("");
+                     $('#textin').val("");
+                     
                   }
                });
             });

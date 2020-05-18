@@ -70,7 +70,8 @@
          <div class="main-content">
 <div id="friend-post">
    <h1 style="font-size: 30px;">Friend Post</h1>
-   {% for friend in friends %}
+   {% for friend in names %}
+   {% for title in posts %}
    <div class="friend1 friend" >
       <div class="border">
          <div class="image">
@@ -81,12 +82,14 @@
          </div>
       </div>
       <div class="friend-post">
-         <h2>Friend Post</h2>
+         <h2>{{title}}</h2>
          <i class="far fa-thumbs-up"></i>
          <a href="#" class="full-post">View full post</a>
       </div>
    </div>
    {% endfor %}
+   {% endfor %}
+
 </div>
 </div>
 </section>

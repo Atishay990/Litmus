@@ -110,19 +110,43 @@ def index(request):
 
 def public_post(request):
     if(request.GET.get('isPublic')=='Public'):
+        user_id = User.objects.get(email=request.user.email).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
         n = Notes()
+        n.user_profile = user_profile
         n.is_public = True
+        n.save()
         return HttpResponse("post made public")
 
 def friend_posts(request):
     friends = f.friend_list(request.user.email)
-    return render(request,"litmus/all_posts.html",{'friends':friends})
+    names = []
+    posts = []
+
+    #user_id = User.objects.get(email=friend).id
+    #user_profile = get_object_or_404(Profile, pk = user_id)
+    for friend in friends:
+        name = User.objects.get(email=friend).profile.first_name
+        names.append(name)
+        user_id = User.objects.get(email=friend).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
+        models = Notes.objects.filter(user_profile = user_profile)
+        for model in models:
+           if(model.is_public== False):
+               posts.append(model.note_title)
+        
+    post_dict = [[post for post in posts]  for name in names]
+    #print(posts)
+    #print(names)
+    print(post_dict)
+    return render(request,"litmus/all_posts.html",{'names':names,'posts':posts})
 
 
 @login_required(login_url ='/litmus/login/')
 def logout_view(request):
     logout(request)
-    return render(request,'litmus/logout.html')
+    #return render(request,'litmus/logout.html')
+    return redirect('home')
     #return HttpResponse("logged out")
 
 def activation_sent_view(request):
