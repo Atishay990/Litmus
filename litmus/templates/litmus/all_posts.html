@@ -70,25 +70,24 @@
          <div class="main-content">
 <div id="friend-post">
    <h1 style="font-size: 30px;">Friend Post</h1>
-   {% for friend in names %}
-   {% for title in posts %}
+   {% for post in posts %}
    <div class="friend1 friend" >
       <div class="border">
          <div class="image">
             <img src="/static/litmus/images/pro.png">
          </div>
          <div class="friend-name">
-            <h2>{{friend}}</h2>
+            <h2>{{post.user_profile.first_name}}</h2>
          </div>
       </div>
       <div class="friend-post">
-         <h2>{{title}}</h2>
+         <h2>{{post.note_title}}</h2>
          <i class="far fa-thumbs-up"></i>
          <a href="#" class="full-post">View full post</a>
       </div>
    </div>
    {% endfor %}
-   {% endfor %}
+   
 
 </div>
 </div>

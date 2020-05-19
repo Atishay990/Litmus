@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Posts</title>
+    <link rel="stylesheet" type="text/css" href="/static/litmus/css/posts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	
+</head>
+<body>
+
+ 
+       <div class="left-panel">
+           <div class="proc">
+               <img class="pro-image" src="/static/litmus/images/pro.png">
+               <h1 class="person-name">
+                   {{name}}
+               </h1>
+               <p>Indian Institute of Information Technology</p>
+           </div>
+           {% for friend in f_list %}
+           <div class="fri">
+           <img class="pro-fri"   src="/static/litmus/images/pro.png">
+           
+           <h1 class="fri-name">{{friend}}</h1>
+          <p class="coll-name">IIITV</p>
+        
+           </div>
+           {% endfor %}
+           <button class="more">More Friends</button>
+
+       </div>
+ 
+    
+    <section id="post">
+        {% for note in all_notes %}
+      <p class="date">{{note.create_time}}</p>
+<div class="paper">
+	<h1 class="title">{{note.note_title}}</h1>
+    <div class="paper-content">
+        <p class="content">{{note.note_body}}</p> 
+        <input id="read-more" type="submit" value="Read More..">
+    </div>
+</div>
+<br/><br/><br/>
+
+ {% endfor %}
+</section>
+
+</body>
+</html>
