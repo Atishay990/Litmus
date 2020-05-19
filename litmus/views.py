@@ -135,7 +135,20 @@ def friend_posts(request):
     #print(names)
     #print(post_dict)
     return render(request,"litmus/all_posts.html",{'posts':posts})
+@csrf_exempt
+def full_post(request):
+   # if(request.is_ajax()):
+   #     title = request.POST.get('title')
+   #     body = request.POST.get('body')
+   #     print(title)
+   #     print(body)
+    return render(request,"litmus/full_post.html")
 
+def like_post(request):
+    post = request.GET.get('liked_post')
+    print(post.no_of_likes)
+    #post.no_of_likes = post.no_of_likes + 1
+    return HttpResponse("Got a like!")
 
 @login_required(login_url ='/litmus/login/')
 def logout_view(request):

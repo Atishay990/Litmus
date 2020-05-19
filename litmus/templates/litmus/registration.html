@@ -1,9 +1,0 @@
-{% extends 'litmus/front-page.html' %}
-
-{% block content %}
-  {% csrf_token %}
-  {% for fields in signup_form %}
-     {{fields}}
-  {% endfor %}
-  &nbsp;
-{% endblock %}

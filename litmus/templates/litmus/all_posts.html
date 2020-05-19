@@ -16,53 +16,10 @@
    </head>
    <body>
 
-   
-
-
-
       <section id="main-page">
     <div>
     
-      <div id="friend-req-area">
-        {% for fname,femail in friendDict.items %}
-         <div class="friend-request-card">
-
-            <div>
-               <img src="/static/litmus/images/pro.png" class="req-img">
-            </div>
-            <div>
-               <h2 class="req-name">{{fname}}</h2>
-               <p class="req-ins">college name</p>
-            </div>
-
-            <button class="accept" id="{{fname}}" value ="{{fname}}"><i class="far fa-check-circle acc-rej"></i></button>
-            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
-            
-         </div>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-            <script type="text/javascript">
-
-            $('#{{fname}}').click(function(){
-   
-               $.ajax({
-                  type:"GET",
-                  url: "accept/",
-                  data:{
-                     friend_email:'{{femail}}'
-                  },
-                  success:function(){
-   
-                  }
-               });
-            });
-      
-         </script>
-        
-          {% endfor %}
-       </div>
-
-
-         <!-- FOR ILLUSTRATION OF MULTIPLE FRIEND REQUEST -->
+     <!-- FOR ILLUSTRATION OF MULTIPLE FRIEND REQUEST -->
 
 
       </div>
@@ -82,13 +39,33 @@
       </div>
       <div class="friend-post">
          <h2>{{post.note_title}}</h2>
-         <i class="far fa-thumbs-up"></i>
-         <a href="#" class="full-post">View full post</a>
+         <i class="far fa-thumbs-up" id="like-button" value="{{post.user_profile}}" ></i>
+         <a href="" id="{{post}}" onlclick = "getPost()">View full post</a>
+        
+         
       </div>
    </div>
+   <script type="text/javascript">
+      function getPost(){
+
+         $.ajax({
+                  type:"POST",
+                  url: "full-post/",
+                  data:{
+                     title:"{{post.note_title}}",
+                     body:"{{post.note_body}}",
+                  },
+                  success:function(){
+                     alert("success");
+                     
+                  }
+               });
+            
+      }
+   document.getElementById("{{post}}").addEventListener("click", getPost)
+   </script>
    {% endfor %}
    
-
 </div>
 </div>
 </section>
