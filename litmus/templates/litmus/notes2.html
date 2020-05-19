@@ -132,21 +132,32 @@
 
          <div class="paper">
             <div class="paper-content">
-               <textarea id="textin" placeholder="Pour in your thoughts !"autofocus spellcheck="false" style="font-size: 23px;"></textarea>
+               <textarea id="textin" placeholder="Pour in your musing !"autofocus spellcheck="false" style="font-size: 23px;"></textarea>
 
             </div>
          </div>
 
 
 <input id="button-create" type="submit" value="Create">
-<span><input id="public-button" type="submit" value="Public">
+<span><input id="public-button" type="submit" value="Public" onclick="postView()">
+  
    <h1 style="display: inline;margin-left: -505px;position: absolute;margin-top: 80px;color: white;font-size: 50px;">/</h1>
 <input id="private-button" type="submit" value="private"></span>
+<script type = "text/javascript">
+    var isPublic = "False";
+     function postView(){
+        isPublic = "True";
+        alert("Post made public");
+     }
+</script>
+
 <div id="message">
    <span id="remain">0</span><span id="complete">   characters remaining</span>
  </div>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
             <script type="text/javascript">
+
+          
 
             $('#button-create').click(function(){
    
@@ -156,30 +167,16 @@
                   data:{
                      title:$('#title').val(),
                      newnote:$('#textin').val(),
-                     
+                     view:isPublic,
                   },
                   success:function(){
-                     alert("Post created.")
+                     alert("Post is created.")
                      $('#title').val("");
                      $('#textin').val("");
                      
                   }
                });
             });
-
-            $('#public-button').click(function(){
-   
-            $.ajax({
-            type:"GET",
-            url: "postIsPublic/",
-            data:{
-              isPublic:$('#public-button').val(),
-           },
-           success:function(){
-
-            }
-          });
-        });
       
          </script>
 </form>

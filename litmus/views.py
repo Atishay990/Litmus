@@ -56,6 +56,7 @@ def add(request):
     # Saving newly added notes from the homepage 
     title = request.GET.get('title')
     newnote = request.GET.get('newnote')
+    Public = request.GET.get('view')
     date = timezone.now()
     user_id = User.objects.get(email=request.user.email).id
     user_profile = get_object_or_404(Profile, pk = user_id)
@@ -64,9 +65,11 @@ def add(request):
     n.note_title = title
     n.note_body = newnote
     n.create_time = date
+    if(Public=="True"):
+        n.is_public = True
+
     n.save()
     #latestnote = n.diary_notes
-    print("notes saved")
     return HttpResponse("successful")
     #return redirect('/litmus/homepagedemo/' + str(user_id) + '/')
 
@@ -108,15 +111,6 @@ def index(request):
     #return render(request,'litmus/front-page.html')
     return render(request, 'litmus/index.html', {'signup_form': SignUpForm()})
 
-def public_post(request):
-    if(request.GET.get('isPublic')=='Public'):
-        user_id = User.objects.get(email=request.user.email).id
-        user_profile = get_object_or_404(Profile, pk = user_id)
-        n = Notes()
-        n.user_profile = user_profile
-        n.is_public = True
-        n.save()
-        return HttpResponse("post made public")
 
 def friend_posts(request):
     friends = f.friend_list(request.user.email)

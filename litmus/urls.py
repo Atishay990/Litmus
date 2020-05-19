@@ -20,7 +20,6 @@ urlpatterns= [
   path('add/',views.add,name='add'),
   #path('postIsPublic/add',views.add,name='add'),
   path('notes_list/',views.show_notes,name ='show_notes'),
-  path('postIsPublic/',views.public_post,name='public_post'),
   path('friend-posts/',views.friend_posts,name='friend_posts'),
 ]
 
