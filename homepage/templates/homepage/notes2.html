@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>note box</title>
+      <link rel="stylesheet" type="text/css" href="/static/homepage/css/notes2.css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+ 
+
+   </head>
+   <body>
+      <section id="main-page">
+    <div>
+      <div class="friend-request">
+          <button id="req-btn"><i class="fas fa-2x fa-user-friends req-ico"></i></button> 
+      </div>
+      <div id="friend-req-area">
+         <div class="friend-request-card">
+            <div>
+               <img src="/static/homepage/images/pro.png" class="req-img">
+            </div>
+            <div>
+               <h2 class="req-name">Friend Name</h2>
+               <p class="req-ins">college name</p>
+            </div>
+            
+            <button class="accept"><i class="far fa-check-circle acc-rej"></i></button>
+            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
+         </div>
+
+         <!-- FOR ILLUSTRATION OF MULTIPLE FRIEND REQUEST -->
+
+         <div class="friend-request-card">
+            <div>
+               <img src="/static/homepage/images/pro.png" class="req-img">
+            </div>
+            <div>
+               <h2 class="req-name">Friend Name</h2>
+               <p class="req-ins">college name</p>
+            </div>
+            <button class="accept"><i class="far fa-check-circle acc-rej"></i></button>
+            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
+         </div>
+
+         <div class="friend-request-card">
+            <div>
+               <img src="/static/homepage/images/pro.png" class="req-img">
+            </div>
+            <div>
+               <h2 class="req-name">Friend Name</h2>
+               <p class="req-ins">college name</p>
+            </div>
+            <button class="accept"><i class="far fa-check-circle acc-rej"></i></button>
+            <button class="reject"><i class="far fa-times-circle acc-rej"></i></button>
+         </div>
+         </div>
+         
+      </div>
+      <section>
+         <div class="main-content">
+      <div id="post-box">
+         <form action = "{% url 'homepagedemo:add' user_id %}" method = "Post" novalidate onsubmit="return limiter.save();"></form>
+
+         <div id="margin"><span style="font-weight: bold; font-size: 25px;">Title:&emsp;</span> <input id="title" type="text" name="title" spellcheck="false">
+         <button class="tools" onclick="displayTools()"><i class="fas fa-pen-alt fa-2x"></i></button>
+         
+       
+         </div>
+         <div id="font-family-tool">
+           <input id="font-family-input" onchange="selectedFont()" value="Monospace" type="text" spellcheck="false">
+           <h1 class="font-family-option" style="font-family:cursive;" onclick="inputfamily('cursive')">Cursive</h1>
+           <h1 class="font-family-option" style="font-family: fantasy;"onclick="inputfamily('fantasy')"> Fantasy</h1>
+           <h1 class="font-family-option" style ="font-family: sans-serif;"onclick="inputfamily('sans-serif')">San-serif</h1>
+           <h1 class="font-family-option" style="font-family: arial;"onclick="inputfamily('arial')">Arial</h1>
+           <h1 class="font-family-option" style="font-family: monospace;"onclick="inputfamily('Monospace')">Monospace</h1>
+           <button id="selected-font"onclick="selectedFontremove()">Select</button>
+
+
+         </div>
+            <form action = "{% url 'homepagedemo:add' user_id %}" method = "Post">
+               {% csrf_token %}
+               <div class="paper">
+                  <div class="paper-content">
+                     <textarea id="textin" placeholder="Pour in your thoughts !"autofocus spellcheck="false" style="font-size: 23px; "  name = "newnote"></textarea>
+                  </div>
+               </div>
+               <input id="button-create" type="submit" value="Create">
+            </form>
+            <div id="message">
+               <span id="remain">0</span><span id="complete">   characters remaining</span> 
+            </div> 
+         </div>
+         
+<div id="friend-post">
+   <h1 style="font-size: 30px;">Friend Post</h1>
+   <div class="friend1 friend" >
+      <div class="border">
+         <div class="image">
+            <img src="/static/homepage/images/pro.png">
+         </div>
+         <div class="friend-name">
+            <h2>Friend Name</h2>
+         </div>
+      </div>
+      <div class="friend-post">
+         <h2>Friend Post</h2>
+         <i class="far fa-thumbs-up"></i>
+         <a href="#" class="full-post">View full post</a>
+      </div>
+   </div>
+   <div class="friend2 friend" >
+      <div class="border">
+         <div class="image">
+            <img src="/static/homepage/images/pro.png">
+         </div>
+         <div class="friend-name">
+            <h2>Friend Name</h2>
+         </div>
+      </div>
+      <div class="friend-post">
+         <h2>Friend Post</h2>
+         <i class="far fa-thumbs-up"></i>
+         <a href="#" class="full-post">View full post</a>
+      </div>
+   </div>
+   <div class="friend3 friend" >
+      <div class="border">
+         <div class="image">
+            <img src="/static/homepage/images/pro.png">
+         </div>
+         <div class="friend-name">
+            <h2>Friend Name</h2>
+         </div>
+      </div>
+      <div class="friend-post">
+         <h2>Friend Post</h2>
+         <i class="far fa-thumbs-up" id="fri-req"></i>
+         <a href="#" class="full-post">View full post</a>
+      </div>
+   </div>
+   <button type="submit">See All Friends</button>
+</div>
+</div>
+</section>
+        <h1 class="trend-head">Trending Posts</h1> 
+      <section id="trending-post"> 
+          <div class="trending-post-container">
+         <button class="slide-button"  onclick="plusDivs(-1)">&#10094;</button>
+         <button class="slide-button1"  onclick="plusDivs(1)">&#10095;</button>
+        
+         <div class="card1 mySlides" style="margin-left: 0;">
+            <div class="/static/homepage/images/prof">
+            <img class="profile-image" src="/static/homepage/images/pro.png" alt="John">
+            </div>
+            <div class="data">
+               <br><br>
+            <h1 class="usr-name">Person name</h1><br>
+            <p class="detail">Detail of the person/owner of this post</p>
+            </div>
+            <img class="post-image" src="data:image/png;base64,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" >
+            <button id="post-button">View Full post</button>
+         </div>
+         <div class="card1 mySlides" style="margin-left: 0;">
+            <div class="prof">
+            <img class="profile-image" src="/static/homepage/images/pro.png" alt="John">
+            </div>
+            <div class="data">
+               <br><br>
+            <h1 class="usr-name">Person name2</h1><br>
+            <p class="detail">Detail of the person/owner of this post</p>
+            </div>
+            <img class="post-image" src="data:image/png;base64,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" >
+            <button id="post-button">View Full post</button>
+         </div>
+       
+        
+      </div> 
+       </section> 
+      </section>
+     
+
+       <div class="scroll-button">
+      
+         <button onclick="topFunction()" id="myBtnscroll" title="Go to top"><i class="arrow up"></i></button>
+     </div>
+         <script src="/static/homepage/css/notes2.js"></script>
+
+    
+   </body>
