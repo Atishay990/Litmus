@@ -180,51 +180,46 @@
 </div>
 <div id="friend-post">
    <h1 style="font-size: 30px;">Friend Post</h1>
+   {% if count <= 3 %}
+   {% for post in posts %}
    <div class="friend1 friend" >
       <div class="border">
          <div class="image">
             <img src="/static/litmus/images/pro.png">
          </div>
          <div class="friend-name">
-            <h2>Friend Name</h2>
+            <h2>{{post.user_profile.first_name}}</h2>
          </div>
       </div>
       <div class="friend-post">
-         <h2>Friend Post</h2>
+         <h2>{{post.note_title}}</h2>
          <i class="far fa-thumbs-up"></i>
          <a href="#" class="full-post">View full post</a>
       </div>
    </div>
-   <div class="friend2 friend" >
-      <div class="border">
-         <div class="image">
-            <img src="/static/litmus/images/pro.png">
-         </div>
-         <div class="friend-name">
-            <h2>Friend Name</h2>
-         </div>
-      </div>
-      <div class="friend-post">
-         <h2>Friend Post</h2>
-         <i class="far fa-thumbs-up"></i>
-         <a href="#" class="full-post">View full post</a>
-      </div>
-   </div>
-   <div class="friend3 friend" >
-      <div class="border">
-         <div class="image">
-            <img src="/static/litmus/images/pro.png">
-         </div>
-         <div class="friend-name">
-            <h2>Friend Name</h2>
-         </div>
-      </div>
-      <div class="friend-post">
-         <h2>Friend Post</h2>
-         <i class="far fa-thumbs-up" id="fri-req"></i>
-         <a href="#" class="full-post">View full post</a>
-      </div>
-   </div>
+  {% endfor %}
+
+  {% else %}
+
+  {% for post in top_3 %}
+  <div class="friend1 friend" >
+     <div class="border">
+        <div class="image">
+           <img src="/static/litmus/images/pro.png">
+        </div>
+        <div class="friend-name">
+           <h2>{{post.user_profile.first_name}}</h2>
+        </div>
+     </div>
+     <div class="friend-post">
+        <h2>{{post.note_title}}</h2>
+        <i class="far fa-thumbs-up"></i>
+        <a href="#" class="full-post">View full post</a>
+     </div>
+  </div>
+ {% endfor %}
+
+  {% endif %}
    <a href="friend-posts/"  button type="submit" id="friend-post">See All Friends</a>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
             <script type="text/javascript">

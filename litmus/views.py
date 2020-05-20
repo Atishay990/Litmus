@@ -48,8 +48,23 @@ def home_view(request):
     
     friendDict = dict(zip(name_list,email_list))
 
-    #return render(request,'litmus/notes2.html')
-    return render(request,'litmus/notes2.html',{'friendDict':friendDict})
+    friends = f.friend_list(request.user.email)
+    posts = []
+    count = 0
+    top_3 = 0
+    for friend in friends:
+        user_id = User.objects.get(email=friend).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
+        models = Notes.objects.filter(user_profile = user_profile)
+        for model in models:
+           if(model.is_public== True):
+              posts.append(model)
+              count = count + 1
+
+    if(len(posts)>3):
+        top_3 = posts[0:3]
+
+    return render(request,'litmus/notes2.html',{'friendDict':friendDict,'posts':posts,'count':count,'top_3':top_3})
 
 
 def add(request):
@@ -115,28 +130,16 @@ def index(request):
 def friend_posts(request):
     friends = f.friend_list(request.user.email)
     posts = []
-    #user_id = User.objects.get(email=friend).id
-    #user_profile = get_object_or_404(Profile, pk = user_id)
     for friend in friends:
-        #name = User.objects.get(email=friend).profile.first_name
-        #names.append(name)
         user_id = User.objects.get(email=friend).id
         user_profile = get_object_or_404(Profile, pk = user_id)
         models = Notes.objects.filter(user_profile = user_profile)
         for model in models:
            if(model.is_public== True):
-              # posts.append(model.note_title)
-              #author.append(name)
               posts.append(model)
-        
-    #post_dict = [[post for post in posts]  for name in names]
-   # print(author)
-   # print(posts)
-    #print(names)
-    #print(post_dict)
+    
     return render(request,"litmus/all_posts.html",{'posts':posts})
 
-@csrf_exempt
 def full_post(request,id,title):
 
     user_profile = get_object_or_404(Profile, pk = id)
