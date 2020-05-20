@@ -23,6 +23,7 @@ urlpatterns= [
   path('notes_list/',views.show_notes,name ='show_notes'),
   path('friend-posts/',views.friend_posts,name='friend_posts'),
   path('friend-posts/<int:id>/<str:title>/',views.full_post,name='full_post'),
+  path('<int:id>/<str:title>/',views.full_post,name='full_post'),
   path('friend-posts/liked/',views.like_post,name='like_post'),
 ]
 

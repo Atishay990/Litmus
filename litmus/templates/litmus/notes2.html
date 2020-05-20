@@ -194,7 +194,7 @@
       <div class="friend-post">
          <h2>{{post.note_title}}</h2>
          <i class="far fa-thumbs-up"></i>
-         <a href="#" class="full-post">View full post</a>
+         <a href="{{post.user_profile.id}}/{{post.note_title}}/" class="full-post">View full post</a>
       </div>
    </div>
   {% endfor %}
@@ -214,13 +214,13 @@
      <div class="friend-post">
         <h2>{{post.note_title}}</h2>
         <i class="far fa-thumbs-up"></i>
-        <a href="#" class="full-post">View full post</a>
+        <a href="{{post.user_profile.id}}/{{post.note_title}}/" class="full-post">View full post</a>
      </div>
   </div>
  {% endfor %}
-
+ <a href="friend-posts/"  button type="submit" id="friend-post">See All Friends</a>
   {% endif %}
-   <a href="friend-posts/"  button type="submit" id="friend-post">See All Friends</a>
+   
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
             <script type="text/javascript">
 
