@@ -135,18 +135,22 @@ def friend_posts(request):
     #print(names)
     #print(post_dict)
     return render(request,"litmus/all_posts.html",{'posts':posts})
+
 @csrf_exempt
-def full_post(request):
-   # if(request.is_ajax()):
-   #     title = request.POST.get('title')
-   #     body = request.POST.get('body')
-   #     print(title)
-   #     print(body)
-    return render(request,"litmus/full_post.html")
+def full_post(request,id,title):
+
+    user_profile = get_object_or_404(Profile, pk = id)
+    models = Notes.objects.filter(user_profile = user_profile)
+    for note in models:
+        if(note.note_title == title):
+            body = note.note_body
+            time = note.create_time
+            break 
+    return render(request,"litmus/full_post.html",{'title':title,'body':body,'time':time})
 
 def like_post(request):
-    post = request.GET.get('liked_post')
-    print(post.no_of_likes)
+    likes = request.GET.get('likes')
+    print(likes)
     #post.no_of_likes = post.no_of_likes + 1
     return HttpResponse("Got a like!")
 

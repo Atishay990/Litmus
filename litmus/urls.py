@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
+from .models import Notes
 from django.conf import settings
 
 urlpatterns= [
@@ -21,8 +22,8 @@ urlpatterns= [
   #path('postIsPublic/add',views.add,name='add'),
   path('notes_list/',views.show_notes,name ='show_notes'),
   path('friend-posts/',views.friend_posts,name='friend_posts'),
-  path('friend-posts/full-post/',views.full_post,name='full_post'),
-  path('friend-posts/like-post/',views.like_post,name='like_post'),
+  path('friend-posts/<int:id>/<str:title>/',views.full_post,name='full_post'),
+  path('friend-posts/liked/',views.like_post,name='like_post'),
 ]
 
 urlpatterns += static((settings.STATIC_URL), document_root=(settings.STATIC_ROOT))

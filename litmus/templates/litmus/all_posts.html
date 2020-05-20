@@ -39,31 +39,29 @@
       </div>
       <div class="friend-post">
          <h2>{{post.note_title}}</h2>
-         <i class="far fa-thumbs-up" id="like-button" value="{{post.user_profile}}" ></i>
-         <a href="" id="{{post}}" onlclick = "getPost()">View full post</a>
-        
-         
+         <i class="far fa-thumbs-up" id="like-button" value="{{post.user_profile}}" onclick  = "likePost()" >{{post.no_of_likes}}</i>
+         <a href="{{post.user_profile.id}}/{{post.note_title}}/" id="{{post}}" >View full post</a>
       </div>
+         <script type="text/javascript">
+            function likePost(){
+      
+               $.ajax({
+                        type:"GET",
+                        url: "liked/",
+                        data:{
+                           likes:'{{post.no_of_likes}}',
+                        },
+                        success:function(){
+                           alert("success");
+                           
+                        }
+                     });
+                  
+            }
+         document.getElementById("like-button").addEventListener("click", likePost)
+         </script>
    </div>
-   <script type="text/javascript">
-      function getPost(){
-
-         $.ajax({
-                  type:"POST",
-                  url: "full-post/",
-                  data:{
-                     title:"{{post.note_title}}",
-                     body:"{{post.note_body}}",
-                  },
-                  success:function(){
-                     alert("success");
-                     
-                  }
-               });
-            
-      }
-   document.getElementById("{{post}}").addEventListener("click", getPost)
-   </script>
+  
    {% endfor %}
    
 </div>
