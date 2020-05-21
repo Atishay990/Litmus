@@ -25,6 +25,7 @@ urlpatterns= [
   path('friend-posts/<int:id>/<str:title>/',views.full_post,name='full_post'),
   path('<int:id>/<str:title>/',views.full_post,name='full_post'),
   path('friend-posts/liked/',views.like_post,name='like_post'),
+  path('liked/',views.like_post,name='like_post'),
 ]
 
 urlpatterns += static((settings.STATIC_URL), document_root=(settings.STATIC_ROOT))

@@ -64,7 +64,19 @@ def home_view(request):
     if(len(posts)>3):
         top_3 = posts[0:3]
 
-    return render(request,'litmus/notes2.html',{'friendDict':friendDict,'posts':posts,'count':count,'top_3':top_3})
+    
+    friends = f.friend_list(request.user.email)
+    most_likes = 0
+    for friend in friends:
+        user_id = User.objects.get(email=friend).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
+        models = Notes.objects.filter(user_profile = user_profile)
+        for model in models:
+           if(model.is_public== True and most_likes < model.no_of_likes):
+               most_likes = model.no_of_likes
+               most_liked_post = model
+
+    return render(request,'litmus/notes2.html',{'friendDict':friendDict,'posts':posts,'count':count,'top_3':top_3,'most_liked_post':most_liked_post})
 
 
 def add(request):
@@ -152,8 +164,19 @@ def full_post(request,id,title):
     return render(request,"litmus/full_post.html",{'title':title,'body':body,'time':time})
 
 def like_post(request):
-    likes = request.GET.get('likes')
-    print(likes)
+    id = request.GET.get('post_id')
+    title = request.GET.get('post_title')
+    likes = int(request.GET.get('current_likes'))
+    likes = likes + 1
+    print(title)
+    user_profile = get_object_or_404(Profile,pk = id)
+    Notes.objects.filter(user_profile = user_profile).filter(note_title = title).update(no_of_likes = likes)
+    models = Notes.objects.filter(user_profile = user_profile)
+    for note in models:
+        if(note.note_title == title):
+            print(note.no_of_likes)
+            break
+    
     #post.no_of_likes = post.no_of_likes + 1
     return HttpResponse("Got a like!")
 

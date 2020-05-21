@@ -39,9 +39,10 @@
       </div>
       <div class="friend-post">
          <h2>{{post.note_title}}</h2>
-         <i class="far fa-thumbs-up" id="like-button" value="{{post.user_profile}}" onclick  = "likePost()" >{{post.no_of_likes}}</i>
+         <i class="far fa-thumbs-up" id="{{post.create_time}}"  >{{post.no_of_likes}}</i>
          <a href="{{post.user_profile.id}}/{{post.note_title}}/" id="{{post}}" >View full post</a>
       </div>
+   </div>
          <script type="text/javascript">
             function likePost(){
       
@@ -49,7 +50,9 @@
                         type:"GET",
                         url: "liked/",
                         data:{
-                           likes:'{{post.no_of_likes}}',
+                           post_id:'{{post.user_profile.id}}',
+                           post_title:'{{post.note_title}}',
+                           current_likes:'{{post.no_of_likes}}' ,
                         },
                         success:function(){
                            alert("success");
@@ -58,9 +61,8 @@
                      });
                   
             }
-         document.getElementById("like-button").addEventListener("click", likePost)
+         document.getElementById("{{post.create_time}}").addEventListener("click", likePost)
          </script>
-   </div>
   
    {% endfor %}
    
