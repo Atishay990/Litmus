@@ -39,14 +39,51 @@ from django.utils import timezone
 
 @login_required(login_url='/litmus/signup/')
 def home_view(request):
+    friendDict={}
+    my_email = request.user.email
+    email_list = f.pendingFriendRequest(my_email)
+    name_list=[]
+    for friend in email_list:
+        name_list.append(User.objects.get(email=friend).profile.first_name)
+    
+    friendDict = dict(zip(name_list,email_list))
 
-    return render(request,'litmus/notes2.html')
+    friends = f.friend_list(request.user.email)
+    posts = []
+    count = 0
+    top_3 = 0
+    for friend in friends:
+        user_id = User.objects.get(email=friend).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
+        models = Notes.objects.filter(user_profile = user_profile)
+        for model in models:
+           if(model.is_public== True):
+              posts.append(model)
+              count = count + 1
+
+    if(len(posts)>3):
+        top_3 = posts[0:3]
+
+    
+    friends = f.friend_list(request.user.email)
+    most_likes = 0
+    for friend in friends:
+        user_id = User.objects.get(email=friend).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
+        models = Notes.objects.filter(user_profile = user_profile)
+        for model in models:
+           if(model.is_public== True and most_likes < model.no_of_likes):
+               most_likes = model.no_of_likes
+               most_liked_post = model
+
+    return render(request,'litmus/notes2.html',{'friendDict':friendDict,'posts':posts,'count':count,'top_3':top_3,'most_liked_post':most_liked_post})
 
 
 def add(request):
     # Saving newly added notes from the homepage 
     title = request.GET.get('title')
     newnote = request.GET.get('newnote')
+    Public = request.GET.get('view')
     date = timezone.now()
     user_id = User.objects.get(email=request.user.email).id
     user_profile = get_object_or_404(Profile, pk = user_id)
@@ -55,9 +92,11 @@ def add(request):
     n.note_title = title
     n.note_body = newnote
     n.create_time = date
+    if(Public=="True"):
+        n.is_public = True
+
     n.save()
     #latestnote = n.diary_notes
-    print("notes saved")
     return HttpResponse("successful")
     #return redirect('/litmus/homepagedemo/' + str(user_id) + '/')
 
@@ -100,10 +139,53 @@ def index(request):
     return render(request, 'litmus/index.html', {'signup_form': SignUpForm()})
 
 
+def friend_posts(request):
+    friends = f.friend_list(request.user.email)
+    posts = []
+    for friend in friends:
+        user_id = User.objects.get(email=friend).id
+        user_profile = get_object_or_404(Profile, pk = user_id)
+        models = Notes.objects.filter(user_profile = user_profile)
+        for model in models:
+           if(model.is_public== True):
+              posts.append(model)
+    
+    return render(request,"litmus/all_posts.html",{'posts':posts})
+
+def full_post(request,id,title):
+
+    user_profile = get_object_or_404(Profile, pk = id)
+    models = Notes.objects.filter(user_profile = user_profile)
+    for note in models:
+        if(note.note_title == title):
+            body = note.note_body
+            time = note.create_time
+            break 
+    return render(request,"litmus/full_post.html",{'title':title,'body':body,'time':time})
+
+def like_post(request):
+    id = request.GET.get('post_id')
+    title = request.GET.get('post_title')
+    likes = int(request.GET.get('current_likes'))
+    likes = likes + 1
+    print(title)
+    user_profile = get_object_or_404(Profile,pk = id)
+    Notes.objects.filter(user_profile = user_profile).filter(note_title = title).update(no_of_likes = likes)
+    models = Notes.objects.filter(user_profile = user_profile)
+    for note in models:
+        if(note.note_title == title):
+            print(note.no_of_likes)
+            break
+    
+    #post.no_of_likes = post.no_of_likes + 1
+    return HttpResponse("Got a like!")
+
 @login_required(login_url ='/litmus/login/')
 def logout_view(request):
     logout(request)
-    return render(request,'litmus/logout.html')
+    #return render(request,'litmus/logout.html')
+    return redirect('home')
+    #return HttpResponse("logged out")
 
 def activation_sent_view(request):
     return render(request,'litmus/activation_sent.html')
@@ -139,9 +221,7 @@ def signup_view (request):
                 user.profile.first_name = form.cleaned_data.get('first_name')
                 user.profile.last_name = form.cleaned_data.get('last_name')
                 user.email = form.cleaned_data.get('e_mail')
-                #user.profile.email = form.cleaned_data.get('email')
-                #user.profile.password1 = form.cleaned_data.get('password1')
-                # user can't login until link confirmed
+               
                 user.is_active = False
                 user.save()
                 current_site = get_current_site(request)
@@ -185,39 +265,19 @@ def signup_view (request):
 
         
 
-#def login_view(request):
-#    if request.method == 'POST':
-#        email = request.POST.get('email')
-#        password = request.POST.get('password')
-#        user = authenticate(email=email, password=password)
-#        if user is not None:
-#            if user.is_active:
-#                login(request,user)
-#                return HttpResponseRedirect(reverse('home'))
-#                #return redirect('home')
-#            else:
-#                return HttpResponse("Your account was inactive.")
-#        else:
-#            print("Someone tried to login and failed.")
-#           #print("They used email: {} and password: {}".format(email,password))
-#            return HttpResponse("Invalid login details given")
-#    else: 
-#        return render(request, 'litmus/front-page.html', {})
 
 def send_friend_request(request):
 
-    if request.method == 'POST':
-        friend_email = request.POST.get('email') # gets email entered by user to whom friend request has to be send
-        my_email  = request.user.email
-        #usid = User.objects.get(email=friend_email).id #gets unique user id of that particular user
-        #other_user = User.objects.get(pk=usid) # searches user of that unique usid
-        #Friend.objects.add_friend(
-        #request.user,other_user,message='Hi!! Wanna hang in.')
-        f.sendFriendRequest(my_email,friend_email)
-        return HttpResponse("Friend request sent")   #Sends friends request
+    #if request.method == 'POST':
+    friend_email = request.GET.get('email') # gets email entered by user to whom friend request has to be send
+    my_email  = request.user.email
+    f.sendFriendRequest(my_email,friend_email)
+    print(friend_email)
+    return render(request,'litmus/send_friend_request.html')
+    #return HttpResponse("Friend request sent")   #Sends friends request
 
-    else:
-        return render(request,'litmus/send_friend_request.html')
+    #else:
+    #    return render(request,'litmus/send_friend_request.html')
 
 def accept_friend_request(request): 
     if request.method == 'GET':
