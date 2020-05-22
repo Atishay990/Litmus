@@ -1,8 +1,6 @@
 #Litmus
 
-![Logo of Litmus](/litmus-logo.png)
-
-
+![Logo](/litmus-logo.jpeg)
 Welcome.
 
 This project is currently under development..
