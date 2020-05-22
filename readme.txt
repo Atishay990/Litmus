@@ -1,4 +1,6 @@
-![Logo of Litmus](/litmus-logo.png)
+#Litmus
+
+![Logo of Litmus] (/litmus-logo.png)
 
 
 Welcome.
