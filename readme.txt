@@ -1,4 +1,4 @@
-![Logo of Litmus](https://drive.google.com/open?id=1qYl80cT9jqs5nep-_3jFrvChra8g5iRD)
+![Logo of Litmus](https://drive.google.com/open?id=16aQdkVa69cX4PYP1-1XiJ8A8cl09ygpC)
 
 
 Welcome.
