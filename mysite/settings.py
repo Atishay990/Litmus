@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%5_8#3#-3owy&ehdm-)h+(l-kxa)#esj-$zq087yh&u9-9eb8e'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -144,8 +144,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #)
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'litmus.info5@gmail.com'
-EMAIL_HOST_PASSWORD = 'Litmus@123'
+
 EMAIL_PORT = 587
 
 #LOGIN_URL = 'litmus/login/'
