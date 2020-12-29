@@ -1,6 +1,8 @@
 
 ![Logo-of-Litmus](litmus-logo.png)
 
+http://litmus-app.herokuapp.com/litmus/
+
 A full fledged web application , for saving daily /weekly/monthly notes, accounts, records. Akin to online personal diary.
 Some notable features:
 * Send friend requests.
